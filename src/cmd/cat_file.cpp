@@ -40,4 +40,5 @@ int handle_cat_file(int argc, char*argv[]){
 
         return EXIT_SUCCESS;
     }
+    return EXIT_FAILURE;
 }
