@@ -7,7 +7,7 @@
 
 using namespace std;
 
-int handle_catfile(int argc, char*argv[]){
+int handle_cat_file(int argc, char*argv[]){
     if(argc <=3){
         cerr << "Invalid arg, required `-p <blob_sha>`\n";
         return EXIT_FAILURE;

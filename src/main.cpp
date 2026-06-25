@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
         return handle_init();
     } 
     else if (command == "cat-file"){
-        return handle_catfile(argc, argv);
+        return handle_cat_file(argc, argv);
     }
     else {
         std::cerr << "Unknown command " << command << '\n';
