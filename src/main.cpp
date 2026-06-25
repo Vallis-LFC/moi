@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include "cmd/init.hpp"
+#include "cmd/cat_file.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -22,10 +23,15 @@ int main(int argc, char *argv[])
     
     if (command == "init") {
         return handle_init();
-    } else {
+    } 
+    else if (command == "cat-file"){
+        return handle_cat_file(argc, argv);
+    }
+    else {
         std::cerr << "Unknown command " << command << '\n';
         return EXIT_FAILURE;
     }
+
     
     return EXIT_SUCCESS;
 }
