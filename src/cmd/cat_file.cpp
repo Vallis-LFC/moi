@@ -37,5 +37,7 @@ int handle_cat_file(int argc, char*argv[]){
         }
 
         cout << object_str.substr(object_str.find('\0')+1) << flush;
+
+        return EXIT_SUCCESS;
     }
 }
