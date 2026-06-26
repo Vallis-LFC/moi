@@ -8,7 +8,7 @@
 using namespace std;
 
 int handle_cat_file(int argc, char*argv[]){
-    if(argc <=3){
+    if(argc !=4){
         cerr << "Invalid arg, required `-p <blob_sha>`\n";
         return EXIT_FAILURE;
     }
@@ -35,10 +35,14 @@ int handle_cat_file(int argc, char*argv[]){
             cerr << "Failed to open object file \n";
             return EXIT_FAILURE;
         }
-
+        size_t null_pos = object_str.find('\0');
+        if(null_pos == std::string::npos){
+            cerr<< "Corrupted git object: missing header terminator. \n";
+            return EXIT_FAILURE;
+        }
         cout << object_str.substr(object_str.find('\0')+1) << flush;
 
         return EXIT_SUCCESS;
     }
-    return EXIT_FAILURE;
+    return EXIT_FAILURE; 
 }
