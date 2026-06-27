@@ -6,7 +6,7 @@
 #include "../external/sha1.hpp"
 #include "../utils/compress.hpp"
 #include "../utils/write_blob.hpp"
-//test
+// This function handles the "hash-object" command, which computes the SHA-1 hash of a file and optionally writes it to the object database.
 using namespace std;
 
 int handle_hash_object(int argc, char* argv[]){
