@@ -10,8 +10,8 @@
 using namespace std;
 
 int handle_hash_object(int argc, char* argv[]){
-    if(argc <=3){
-        cerr<<"invalid arg";
+    if(argc !=4){
+        cerr << "Invalid arguments. Usage: " << argv[0] << " hash-object -w <file_path>\n";
         return EXIT_FAILURE;
     }
 
@@ -35,6 +35,10 @@ int handle_hash_object(int argc, char* argv[]){
         }
 
         string digest = write_blob(file_path);
+        if (digest.empty()){
+            cerr<<"failed to write blob for file: "<<file_path<<endl;
+            return EXIT_FAILURE;
+        }
         cout<< digest<< endl;
 
     }

@@ -13,7 +13,7 @@ string write_blob(const string&file_path){
     ifstream input_file(file_path, ios::binary);
     if(!input_file){
         cerr<<"failed to open file"<< file_path << endl;
-        exit(EXIT_FAILURE);
+        return "";
     }
 
     string file_content{istreambuf_iterator<char>(input_file), istreambuf_iterator<char>()};
@@ -28,7 +28,7 @@ string write_blob(const string&file_path){
     string sub_dir_name = digest.substr(0,2);
     string object_file_name = digest.substr(2);
 
-    filesystem::create_directory(".git/objects/"+sub_dir_name);
+    filesystem::create_directories(".git/objects/"+sub_dir_name);
     string full_path = ".git/objects/" +sub_dir_name+object_file_name;
 
     string compressed_data;
@@ -38,7 +38,11 @@ string write_blob(const string&file_path){
     }
 
     ofstream output_file(full_path, ios::binary);
+    if (!output_file){
+        cerr<<"failed to create object file to path"<< full_path << endl;
+        exit(EXIT_FAILURE);
+    }
     output_file.write(compressed_data.data(), compressed_data.size());
-    
+    output_file.close();
     return digest; //return in hex format
 }
