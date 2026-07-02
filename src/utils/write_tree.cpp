@@ -41,6 +41,7 @@ string write_tree(const filesystem::path &dir){
         if(!obj_hash.empty()){
             tree_entries_map[name] = make_pair(mode, obj_hash);
         }
+    }
 
         string tree_entries;
         for(const auto &entry: tree_entries_map){
@@ -55,7 +56,7 @@ string write_tree(const filesystem::path &dir){
             return "";
         }
 
-        string final_content = "tree"+to_string(tree_entries.size())+'\0'+tree_entries;
+        string final_content = "tree "+to_string(tree_entries.size())+'\0'+tree_entries;
 
         SHA1 checksum;
         checksum.update(final_content);
@@ -77,5 +78,5 @@ string write_tree(const filesystem::path &dir){
         output_file.write(compressed_data.data(), compressed_data.size());
 
         return digest;
-    }
+    
 }
